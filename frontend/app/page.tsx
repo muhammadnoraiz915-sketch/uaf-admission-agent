@@ -90,6 +90,19 @@ export default function Home() {
     const t = setTimeout(() => setHeroVisible(true), 100);
     return () => clearTimeout(t);
   }, [showLanding]);
+  // Backend ko jaaga rakho
+useEffect(() => {
+  const keepAlive = setInterval(() => {
+    fetch("https://muhammadnoraiz915-uaf-admission-backend.hf.space/")
+      .catch(() => {});
+  }, 240000); // har 4 minute mein
+  
+  // Pehle bhi ek baar ping karo
+  fetch("https://muhammadnoraiz915-uaf-admission-backend.hf.space/")
+    .catch(() => {});
+    
+  return () => clearInterval(keepAlive);
+}, []);
 
   const sendMessage = async (text?: string) => {
     const msg = text || input;
